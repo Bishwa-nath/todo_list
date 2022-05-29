@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>Update Tasks</title>
+  </head>
+  <body>
+    <h1>Update your task</h1>
+    <form action="updatetask/{{ tasks.id }}" method="post">
+      {% csrf_token %}
+      <b>Title: </b> <br />
+      <input type="text" name="title" placeholder="Title" size="64" required />
+      <br />
+      <b>Description:</b> <br />
+      <textarea
+        name="descrip"
+        cols="60"
+        rows="4"
+        placeholder="Your tast description"
+      ></textarea>
+      <br />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

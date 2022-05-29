@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <!-- <link rel="stylesheet" href="style.css" /> -->
+    <title>To Do Home</title>
+  </head>
+  <body>
+    <h1>Welcome to To Do List</h1>
+    <section class="flexibal-container">
+      <div class="container gap-r">
+        <h3>Add your task</h3>
+        <form action="addtask/" method="post">
+          {% csrf_token %}
+          <b>Title: </b> <br />
+          <input
+            type="text"
+            name="title"
+            placeholder="Title"
+            size="64"
+            required
+          />
+          <br />
+          <b>Description:</b> <br />
+          <textarea
+            name="descrip"
+            cols="60"
+            rows="4"
+            placeholder="Your tast description"
+          ></textarea>
+          <br />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+      <div class="container gap-l">
+        <h3>Your tast list</h3>
+
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>Title</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for t in tasks %}
+            <tr>
+              <td><a href="update/{{ t.id }}">Update</a></td>
+              <td>{{ t.title }}</td>
+              <td>{{ t.descrip }}</td>
+              <td><a href="delete/{{ t.id }}">Delete</a></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </body>
+</html>
